@@ -3,6 +3,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { createClient } from 'contentful'
 import { IArticle } from '../@types/generated/contentful';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 interface Props {
   articles: IArticle[]
@@ -42,7 +43,12 @@ const Home: NextPage<Props> = (props) => {
 
       <main className={styles.main}>
         <ul>
-          {articles.map(article => <li key={article.sys.id}>{article.fields.title}</li>)}
+          {articles.map(article => {
+            return <li key={article.sys.id}>
+              <h2>{article.fields.title}</h2>
+              {article.fields.body.map(b => <div key={b.sys.id}>{documentToReactComponents(b.fields.text)}</div>)}
+            </li>
+          })}
         </ul>
       </main>
 
