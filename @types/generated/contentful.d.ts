@@ -102,7 +102,42 @@ export interface ISeoMetadata extends Entry<ISeoMetadataFields> {
   };
 }
 
-export type CONTENT_TYPE = "article" | "componentText" | "seoMetadata";
+export interface ITestimonialsFields {
+  /** Customer */
+  customer: string;
+
+  /** Position */
+  position: string;
+
+  /** Company */
+  company: string;
+
+  /** Testimonial */
+  testimonial: Document;
+}
+
+export interface ITestimonials extends Entry<ITestimonialsFields> {
+  sys: {
+    id: string;
+    type: string;
+    createdAt: string;
+    updatedAt: string;
+    locale: string;
+    contentType: {
+      sys: {
+        id: "testimonials";
+        linkType: "ContentType";
+        type: "Link";
+      };
+    };
+  };
+}
+
+export type CONTENT_TYPE =
+  | "article"
+  | "componentText"
+  | "seoMetadata"
+  | "testimonials";
 
 export type LOCALE_CODE = "en-US";
 
